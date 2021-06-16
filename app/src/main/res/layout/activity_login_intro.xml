@@ -46,6 +46,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Get Started"
+        android:textColor="@color/colorPrimaryButton"
+        android:background="@drawable/btn_primary"
         app:layout_constraintEnd_toEndOf="@+id/txt_login_subheader"
         app:layout_constraintStart_toStartOf="@+id/txt_login_subheader"
         app:layout_constraintTop_toBottomOf="@+id/txt_login_subheader" />
