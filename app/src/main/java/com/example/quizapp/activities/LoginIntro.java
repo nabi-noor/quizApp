@@ -1,4 +1,4 @@
-package com.example.quizapp;
+package com.example.quizapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,9 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.quizapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginIntro extends AppCompatActivity {
@@ -38,7 +38,7 @@ public class LoginIntro extends AppCompatActivity {
     private void redirect(int i){
         Intent intents[] = {
                 new Intent(LoginIntro.this,MainActivity.class),
-                new Intent(LoginIntro.this,LoginActivity.class)
+                new Intent(LoginIntro.this, LoginActivity.class)
         };
         try {
             startActivity(intents[i]);

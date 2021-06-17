@@ -1,4 +1,4 @@
-package com.example.quizapp;
+package com.example.quizapp.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.quizapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -54,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         registerText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
+                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
                 finish();
             }
         });
@@ -69,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()){
                     Log.d("EmailPassword","SignINWithEmail:Success");
                     FirebaseUser user = mauth.getCurrentUser();
-                    startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
                 }else{
                     Log.d("EmailPassword","SignINWithEmail:Fail", task.getException());
