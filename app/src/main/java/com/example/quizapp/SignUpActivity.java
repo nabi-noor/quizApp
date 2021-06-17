@@ -3,6 +3,7 @@ package com.example.quizapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -45,10 +46,10 @@ public class SignUpActivity extends AppCompatActivity {
                 String email = emailEt.getText().toString();
                 String password = passwordEt.getText().toString();
                 String passwordAgain = passwordAgainEt.getText().toString();
-                if(email.isEmpty() || password.isEmpty() || passwordAgain.isEmpty()){
+                if(email.isEmpty()){
                     Toast.makeText(getApplicationContext(),"Email or password missing",Toast.LENGTH_SHORT).show();
                 }
-                else if(password == passwordAgain){
+                else if(password.equals(passwordAgain)){
                     createAccount(email,password);
                 }
                 else{
@@ -57,6 +58,13 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+        signInView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
+                finish();
+            }
+        });
 
     }
 
@@ -83,6 +91,8 @@ public class SignUpActivity extends AppCompatActivity {
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(getApplicationContext(), "User Registered",
                                     Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(SignUpActivity.this,MainActivity.class));
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
