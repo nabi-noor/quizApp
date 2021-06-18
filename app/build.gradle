@@ -31,6 +31,9 @@ android {
 
 dependencies {
     def VERSION_ANDROID_SUPPORT = '24.2.1'
+    def lifecycle_version = "2.2.0"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     compile "com.android.support:appcompat-v7:$VERSION_ANDROID_SUPPORT"
     compile "com.android.support:recyclerview-v7:$VERSION_ANDROID_SUPPORT"
     implementation 'androidx.appcompat:appcompat:1.2.0'

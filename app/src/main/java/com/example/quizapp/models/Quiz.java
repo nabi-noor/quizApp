@@ -1,10 +1,9 @@
 package com.example.quizapp.models;
 
 public class Quiz {
-    public Quiz(String id, String title, Question[] questions) {
+    public Quiz(String id, String title) {
         this.id = id;
         this.title = title;
-        this.questions = questions;
     }
 
     private String id;
