@@ -1,79 +1,95 @@
 package com.example.quizapp.models;
 
 public class Question {
-    private String description;
+     public Question(String description, String option1, String option2, String option3, String option4, String answer, String userAnswer) {
+          this.description = description;
+          this.option1 = option1;
+          this.option2 = option2;
+          this.option3 = option3;
+          this.option4 = option4;
+          this.answer = answer;
+          this.userAnswer = userAnswer;
+     }
 
-    public Question(String description, String optionOne, String optionTwo, String optionThree, String optionFour, String answer) {
-        this.description = description;
-        this.optionOne = optionOne;
-        this.optionTwo = optionTwo;
-        this.optionThree = optionThree;
-        this.optionFour = optionFour;
-        this.answer = answer;
-    }
+     public String description;
+     public String option1;
 
-    private String optionOne;
+     public String getDescription() {
+          return description;
+     }
 
-    public String getDescription() {
-        return description;
-    }
+     public void setDescription(String description) {
+          this.description = description;
+     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+     public String getOption1() {
+          return option1;
+     }
 
-    public String getOptionOne() {
-        return optionOne;
-    }
+     public void setOption1(String option1) {
+          this.option1 = option1;
+     }
 
-    public void setOptionOne(String optionOne) {
-        this.optionOne = optionOne;
-    }
+     public String getOption2() {
+          return option2;
+     }
 
-    public String getOptionTwo() {
-        return optionTwo;
-    }
+     public void setOption2(String option2) {
+          this.option2 = option2;
+     }
 
-    public void setOptionTwo(String optionTwo) {
-        this.optionTwo = optionTwo;
-    }
+     public String getOption3() {
+          return option3;
+     }
 
-    public String getOptionThree() {
-        return optionThree;
-    }
+     public void setOption3(String option3) {
+          this.option3 = option3;
+     }
 
-    public void setOptionThree(String optionThree) {
-        this.optionThree = optionThree;
-    }
+     public String getOption4() {
+          return option4;
+     }
 
-    public String getOptionFour() {
-        return optionFour;
-    }
+     public void setOption4(String option4) {
+          this.option4 = option4;
+     }
 
-    public void setOptionFour(String optionFour) {
-        this.optionFour = optionFour;
-    }
+     public String getAnswer() {
+          return answer;
+     }
 
-    public String getAnswer() {
-        return answer;
-    }
+     public void setAnswer(String answer) {
+          this.answer = answer;
+     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
+     public String getUserAnswer() {
+          return userAnswer;
+     }
 
-    public String getUserAnswer() {
-        return userAnswer;
-    }
+     public void setUserAnswer(String userAnswer) {
+          this.userAnswer = userAnswer;
+     }
 
-    public void setUserAnswer(String userAnswer) {
-        this.userAnswer = userAnswer;
-    }
+     public String option2;
 
-    private String optionTwo;
-    private String optionThree;
-    private String optionFour;
-    private String answer;
-    private String userAnswer;
+     @Override
+     public String toString() {
+          return "Question{" +
+                  "description='" + description + '\'' +
+                  ", option1='" + option1 + '\'' +
+                  ", option2='" + option2 + '\'' +
+                  ", option3='" + option3 + '\'' +
+                  ", option4='" + option4 + '\'' +
+                  ", answer='" + answer + '\'' +
+                  ", userAnswer='" + userAnswer + '\'' +
+                  '}';
+     }
+
+     public String option3;
+     public String option4;
+     public String answer;
+     public String userAnswer;
+     public Question() {
+     }
 
 }

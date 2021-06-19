@@ -1,12 +1,35 @@
 package com.example.quizapp.models;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Quiz {
-    public Quiz(String id, String title) {
+
+
+    public String id;
+
+    public Quiz(String id, String title, Map<String, Question> questions) {
         this.id = id;
         this.title = title;
+        this.questions = questions;
     }
 
-    private String id;
+    public String title;
+
+    public Map<String, Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(Map<String, Question> questions) {
+        this.questions = questions;
+    }
+
+    public Map<String, Question> questions= Map.of();
+
 
     public String getId() {
         return id;
@@ -24,14 +47,7 @@ public class Quiz {
         this.title = title;
     }
 
-    public Question[] getQuestions() {
-        return questions;
-    }
 
-    public void setQuestions(Question[] questions) {
-        this.questions = questions;
+    public Quiz() {
     }
-
-    private String title;
-    private Question questions[];
 }
