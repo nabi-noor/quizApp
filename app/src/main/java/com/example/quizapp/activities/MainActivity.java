@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mainDrawer = (DrawerLayout)findViewById(R.id.main_drawer);
         appBar =(Toolbar)findViewById(R.id.top_bar);
+        recyclerView = (RecyclerView)findViewById(R.id.quiz_recycler_view);
         pupulateDummy();
         setupView();
 
@@ -42,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView() {
-        recyclerView = (RecyclerView)findViewById(R.id.quiz_recycler_view);
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
         recyclerView.setAdapter(new QuizViewAdapter(quizzes));
     }
