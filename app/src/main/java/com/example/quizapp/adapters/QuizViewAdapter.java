@@ -1,5 +1,7 @@
 package com.example.quizapp.adapters;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quizapp.R;
+import com.example.quizapp.activities.QuestionActivity;
+import com.example.quizapp.models.Question;
 import com.example.quizapp.models.Quiz;
 
 import org.w3c.dom.Text;
@@ -17,10 +21,12 @@ import org.w3c.dom.Text;
 import java.util.List;
 
 public class QuizViewAdapter extends RecyclerView.Adapter<QuizViewAdapter.QuizViewHolder> {
-
+    private Context context;
     private List<Quiz> quizzes;
-    public QuizViewAdapter(List<Quiz> quizzes){
+    public QuizViewAdapter(List<Quiz> quizzes, Context context)
+    {
         this.quizzes = quizzes;
+        this.context = context;
     }
     @NonNull
     @Override
@@ -33,6 +39,14 @@ public class QuizViewAdapter extends RecyclerView.Adapter<QuizViewAdapter.QuizVi
     @Override
     public void onBindViewHolder(@NonNull QuizViewHolder holder, int position) {
         holder.quizTitle.setText((quizzes.get(position).title));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, QuestionActivity.class);
+                intent.putExtra("DATE", quizzes.get(position).title);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

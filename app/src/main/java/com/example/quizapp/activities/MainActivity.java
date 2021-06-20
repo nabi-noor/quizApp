@@ -36,6 +36,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,11 +67,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("ErrorFirebase",error.getMessage());
                 return;
             }
-
-            Log.d("DATA",value.toObjects(Quiz.class).toString());
             quizzes.addAll(value.toObjects(Quiz.class));
             quizViewAdapter.notifyDataSetChanged();
-            Log.d("DATA",quizzes.get(0).questions.toString());
 
 
         });
@@ -94,8 +92,10 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onPositiveButtonClick(Long selection) {
                         Log.d("DATEPICKER",materialDatePicker.getHeaderText());
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+                        String date = dateFormat.format(selection);
                         Intent i = new Intent(getApplicationContext(),QuestionActivity.class);
-                        i.putExtra("date",materialDatePicker.getHeaderText());
+                        i.putExtra("DATE",date);
                         startActivity(i);
                     }
                 });
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupRecyclerView() {
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
-        quizViewAdapter = new QuizViewAdapter(quizzes);
+        quizViewAdapter = new QuizViewAdapter(quizzes,this);
         recyclerView.setAdapter(quizViewAdapter);
     }
 
