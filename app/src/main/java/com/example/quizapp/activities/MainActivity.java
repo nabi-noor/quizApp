@@ -9,9 +9,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.quizapp.R;
@@ -20,6 +24,9 @@ import com.example.quizapp.models.Quiz;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -73,6 +80,41 @@ public class MainActivity extends AppCompatActivity {
         setupFirestore();
         setupDrawer();
         setupRecyclerView();
+        setupDatePicker();
+    }
+
+    private void setupDatePicker() {
+        FloatingActionButton btnDatePicker = (FloatingActionButton) findViewById(R.id.btn_date_picker);
+        btnDatePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MaterialDatePicker<Long> materialDatePicker = MaterialDatePicker.Builder.datePicker().build();
+                materialDatePicker.show(getSupportFragmentManager(),"DatePicker");
+                materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Long>() {
+                    @Override
+                    public void onPositiveButtonClick(Long selection) {
+                        Log.d("DATEPICKER",materialDatePicker.getHeaderText());
+                        Intent i = new Intent(getApplicationContext(),QuestionActivity.class);
+                        i.putExtra("date",materialDatePicker.getHeaderText());
+                        startActivity(i);
+                    }
+                });
+
+                materialDatePicker.addOnNegativeButtonClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.d("DATEPICKER","Date picker was cancelled");
+                    }
+                });
+
+                materialDatePicker.addOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        Log.d("DATEPICKER","Date picker was not proceeded");
+                    }
+                });
+            }
+        });
     }
 
     private void setupRecyclerView() {
