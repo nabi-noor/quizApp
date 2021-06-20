@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d("DATA",value.toObjects(Quiz.class).toString());
             quizzes.addAll(value.toObjects(Quiz.class));
             quizViewAdapter.notifyDataSetChanged();
+            Log.d("DATA",quizzes.get(0).questions.toString());
 
 
         });
