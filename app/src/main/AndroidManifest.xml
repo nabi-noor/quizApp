@@ -9,13 +9,17 @@
         android:roundIcon="@drawable/ic_question"
         android:supportsRtl="true"
         android:theme="@style/Theme.QuizApp.NoActionBar">
-        <activity android:name=".activities.QuestionActivity" android:theme="@style/Theme.QuizApp">
-        </activity>
+        <activity android:name=".activities.ProfileActivity"></activity>
+        <activity android:name=".activities.ResultActivity" />
+        <activity
+            android:name=".activities.QuestionActivity"
+            android:theme="@style/Theme.QuizApp" />
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.SignUpActivity" />
         <activity android:name=".activities.LoginIntro">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -24,6 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,32 +49,34 @@ public class QuestionActivity extends AppCompatActivity {
         quizzes = new ArrayList<Quiz>();
         questions = Map.of();
         index = 1;
+        next = (Button)findViewById(R.id.btn_next);
+        previous = (Button)findViewById(R.id.btn_previous);
+        submit = (Button)findViewById(R.id.btn_submit);
+        next.setVisibility(View.GONE);
+        previous.setVisibility(View.GONE);
+        submit.setVisibility(View.GONE);
         setupFirebase();
         setupEventLinstners();
     }
 
     private void setupEventLinstners() {
-        previous.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                index --;
-                bindView();
-            }
+        previous.setOnClickListener(v -> {
+            index --;
+            bindView();
         });
 
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                index++;
-                bindView();
-            }
+        next.setOnClickListener(v -> {
+            index++;
+            bindView();
         });
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("Finish","Quiz Finished");
-            }
+        submit.setOnClickListener(v -> {
+            Log.d("FINISH", "Quiz Finished");
+            Intent intent = new Intent(getApplicationContext(),ResultActivity.class);
+            String json = new Gson().toJson(quizzes.get(0));
+            Log.d("FINISH",json);
+            intent.putExtra("QUIZ",json);
+            startActivity(intent);
         });
     }
 
@@ -98,15 +101,8 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     private void bindView() {
-        next = (Button)findViewById(R.id.btn_next);
-        previous = (Button)findViewById(R.id.btn_previous);
-        submit = (Button)findViewById(R.id.btn_submit);
 
-        next.setVisibility(View.GONE);
-        previous.setVisibility(View.GONE);
-        submit.setVisibility(View.GONE);
-
-        if (index == 1){
+        if (index == 1 && questions.size() != 1){
             next.setVisibility(View.VISIBLE);
         }else if(index == questions.size()){
             submit.setVisibility(View.VISIBLE);

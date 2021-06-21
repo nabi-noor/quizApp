@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NavUtils;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +28,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private FirebaseFirestore firebaseFirestore;
     private QuizViewAdapter quizViewAdapter;
+    private NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         mainDrawer = (DrawerLayout)findViewById(R.id.main_drawer);
         appBar =(Toolbar)findViewById(R.id.top_bar);
         recyclerView = (RecyclerView)findViewById(R.id.quiz_recycler_view);
+        navigationView = (NavigationView)findViewById(R.id.navigation_view);
         setupView();
 
     }
@@ -126,6 +130,14 @@ public class MainActivity extends AppCompatActivity {
     private void setupDrawer(){
         setSupportActionBar(appBar);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this,mainDrawer,R.string.app_name,R.string.app_name);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+                mainDrawer.closeDrawers();
+                return true;
+            }
+        });
     }
 
     @Override

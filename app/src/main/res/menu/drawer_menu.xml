@@ -2,7 +2,7 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Follow Us" />
-    <item android:title="Profile" />
-    <item android:title="Rate Us" />
+    <item android:title="Follow Us" android:id="@+id/follow_us_btn" />
+    <item android:title="Profile" android:id="@+id/profile_btn"/>
+    <item android:title="Rate Us" android:id="@+id/rate_us_btn"/>
 </menu>
