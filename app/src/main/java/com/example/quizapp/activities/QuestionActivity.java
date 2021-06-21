@@ -85,17 +85,14 @@ public class QuestionActivity extends AppCompatActivity {
         String date = getIntent().getStringExtra("DATE");
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
         if (date != null){
-            firebaseFirestore.collection("Quizes").whereEqualTo("title",date).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                @Override
-                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                    if (queryDocumentSnapshots != null && !queryDocumentSnapshots.isEmpty()){
-                        Log.d("DATA",queryDocumentSnapshots.toObjects(Quiz.class).get(0).toString());
-                        quizzes.addAll(queryDocumentSnapshots.toObjects(Quiz.class));
-                        questions = quizzes.get(0).questions;
-                        bindView();
-                    }
-
+            firebaseFirestore.collection("Quizes").whereEqualTo("title",date).get().addOnSuccessListener(queryDocumentSnapshots -> {
+                if (queryDocumentSnapshots != null && !queryDocumentSnapshots.isEmpty()){
+                    Log.d("DATA",queryDocumentSnapshots.toObjects(Quiz.class).get(0).toString());
+                    quizzes.addAll(queryDocumentSnapshots.toObjects(Quiz.class));
+                    questions = quizzes.get(0).questions;
+                    bindView();
                 }
+
             });
 
         }

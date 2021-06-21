@@ -95,8 +95,9 @@ public class MainActivity extends AppCompatActivity {
             materialDatePicker.show(getSupportFragmentManager(),"DatePicker");
             materialDatePicker.addOnPositiveButtonClickListener(selection -> {
                 Log.d("DATEPICKER",materialDatePicker.getHeaderText());
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                 String date = dateFormat.format(selection);
+                Log.d("DATEOB",date);
                 Intent i = new Intent(getApplicationContext(),QuestionActivity.class);
                 i.putExtra("DATE",date);
                 startActivity(i);

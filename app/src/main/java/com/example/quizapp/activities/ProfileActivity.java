@@ -27,7 +27,9 @@ public class ProfileActivity extends AppCompatActivity {
 
         logoutBtn.setOnClickListener(v -> {
             firebaseAuth.signOut();
-            startActivity(new Intent(this,LoginIntro.class));
+            startActivity(new Intent(this,LoginIntro.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))   ;
+            finish();
+
         });
     }
 
