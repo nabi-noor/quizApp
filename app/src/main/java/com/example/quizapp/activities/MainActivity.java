@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.quizapp.R;
@@ -29,6 +30,7 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         appBar =(Toolbar)findViewById(R.id.top_bar);
         recyclerView = (RecyclerView)findViewById(R.id.quiz_recycler_view);
         navigationView = (NavigationView)findViewById(R.id.navigation_view);
+
         setupView();
 
     }
@@ -87,37 +90,21 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupDatePicker() {
         FloatingActionButton btnDatePicker = (FloatingActionButton) findViewById(R.id.btn_date_picker);
-        btnDatePicker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MaterialDatePicker<Long> materialDatePicker = MaterialDatePicker.Builder.datePicker().build();
-                materialDatePicker.show(getSupportFragmentManager(),"DatePicker");
-                materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Long>() {
-                    @Override
-                    public void onPositiveButtonClick(Long selection) {
-                        Log.d("DATEPICKER",materialDatePicker.getHeaderText());
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
-                        String date = dateFormat.format(selection);
-                        Intent i = new Intent(getApplicationContext(),QuestionActivity.class);
-                        i.putExtra("DATE",date);
-                        startActivity(i);
-                    }
-                });
+        btnDatePicker.setOnClickListener(v -> {
+            MaterialDatePicker<Long> materialDatePicker = MaterialDatePicker.Builder.datePicker().build();
+            materialDatePicker.show(getSupportFragmentManager(),"DatePicker");
+            materialDatePicker.addOnPositiveButtonClickListener(selection -> {
+                Log.d("DATEPICKER",materialDatePicker.getHeaderText());
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+                String date = dateFormat.format(selection);
+                Intent i = new Intent(getApplicationContext(),QuestionActivity.class);
+                i.putExtra("DATE",date);
+                startActivity(i);
+            });
 
-                materialDatePicker.addOnNegativeButtonClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Log.d("DATEPICKER","Date picker was cancelled");
-                    }
-                });
+            materialDatePicker.addOnNegativeButtonClickListener(v1 -> Log.d("DATEPICKER","Date picker was cancelled"));
 
-                materialDatePicker.addOnCancelListener(new DialogInterface.OnCancelListener() {
-                    @Override
-                    public void onCancel(DialogInterface dialog) {
-                        Log.d("DATEPICKER","Date picker was not proceeded");
-                    }
-                });
-            }
+            materialDatePicker.addOnCancelListener(dialog -> Log.d("DATEPICKER","Date picker was not proceeded"));
         });
     }
 
@@ -130,13 +117,13 @@ public class MainActivity extends AppCompatActivity {
     private void setupDrawer(){
         setSupportActionBar(appBar);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this,mainDrawer,R.string.app_name,R.string.app_name);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        navigationView.setNavigationItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.profile_btn){
                 startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
                 mainDrawer.closeDrawers();
                 return true;
             }
+            return false;
         });
     }
 
